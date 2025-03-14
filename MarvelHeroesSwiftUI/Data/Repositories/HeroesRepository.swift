@@ -11,3 +11,18 @@ class HeroesRepository: HeroesRepositoryProtocol {
         return await network.fetchHeroes(filter: filter)
     }
 }
+
+
+
+//Mock
+final class HeroesRepositoryMock: HeroesRepositoryProtocol {
+    private let network: HeroesNetworkProtocol
+
+    init(network: HeroesNetworkProtocol = NetworkHeroesMock()) {
+        self.network = network
+    }
+
+    func getHeroes(filter: String) async -> [Hero] {
+        return await network.fetchHeroes(filter: filter)
+    }
+}

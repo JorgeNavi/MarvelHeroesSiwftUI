@@ -6,9 +6,6 @@ struct RootView: View {
     var body: some View {
         if viewModel.state == .loading {
             ProgressView("Loading heroes...")
-                .onAppear {
-                    Task { await viewModel.getHeroes() }
-                }
         } else {
             HeroesView()
         }

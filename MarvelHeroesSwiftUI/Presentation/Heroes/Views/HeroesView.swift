@@ -14,7 +14,7 @@ struct HeroesView: View {
     ]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 TextField("Search hero...", text: $searchText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -34,7 +34,9 @@ struct HeroesView: View {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(viewModel.heroesData) { hero in
-                                HeroCardView(hero: hero)
+                                NavigationLink(destination: HeroDetailView(viewModel: HeroDetailViewModel(hero: hero))) {
+                                    HeroCardView(hero: hero)
+                                }
                             }
                         }
                         .padding()
@@ -76,7 +78,7 @@ struct HeroCardView: View {
 // MARK: - Vista Previa
 struct HeroesView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = HeroesViewModel()
+        let viewModel = HeroesViewModel(useCaseHeroes: HeroesUseCaseMock())
         return HeroesView().environment(viewModel)
     }
 }

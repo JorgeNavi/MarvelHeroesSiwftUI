@@ -34,11 +34,12 @@ class NetworkHeroes: HeroesNetworkProtocol {
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("Código de respuesta: \(httpResponse.statusCode)")
-                print("Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")") 
+                //print("Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")") 
                 
                 if httpResponse.statusCode == 200 {
+                    print("📥 Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
                     do {
-                        let decodedResponse = try JSONDecoder().decode(HeroResponse.self, from: data)
+                        let decodedResponse = try JSONDecoder.marvelDecoder.decode(HeroResponse.self, from: data)
                         modelReturn = decodedResponse.data.results
                         print("Héroes recibidos: \(modelReturn.count)")
                     } catch {
@@ -59,5 +60,47 @@ class NetworkHeroes: HeroesNetworkProtocol {
     private func generateMD5(_ string: String) -> String {
         let digest = Insecure.MD5.hash(data: string.data(using: .utf8)!)
         return digest.map { String(format: "%02hhx", $0) }.joined()
+    }
+}
+
+
+//Mock
+final class NetworkHeroesMock: HeroesNetworkProtocol {
+    func fetchHeroes(filter: String) async -> [Hero] {
+        let hero1 = Hero(
+            id: 1011334,
+            name: "3-D Man",
+            description: "Un héroe con visión mejorada y habilidades de combate mejoradas.",
+            modified: Date(),
+            thumbnail: HeroThumbnail(
+                path: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784",
+                thumbnailExtension: "jpg"
+            ),
+            resourceURI: "http://gateway.marvel.com/v1/public/characters/1011334",
+            comics: Comics(available: 12, collectionURI: "", items: [], returned: 12),
+            series: Comics(available: 3, collectionURI: "", items: [], returned: 3),
+            stories: Stories(available: 21, collectionURI: "", items: [], returned: 20),
+            events: Comics(available: 1, collectionURI: "", items: [], returned: 1),
+            urls: []
+        )
+
+        let hero2 = Hero(
+            id: 1017100,
+            name: "A-Bomb",
+            description: "Rick Jones convertido en A-Bomb con fuerza sobrehumana.",
+            modified: Date(),
+            thumbnail: HeroThumbnail(
+                path: "https://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16",
+                thumbnailExtension: "jpg"
+            ),
+            resourceURI: "http://gateway.marvel.com/v1/public/characters/1017100",
+            comics: Comics(available: 4, collectionURI: "", items: [], returned: 4),
+            series: Comics(available: 2, collectionURI: "", items: [], returned: 2),
+            stories: Stories(available: 7, collectionURI: "", items: [], returned: 7),
+            events: Comics(available: 0, collectionURI: "", items: [], returned: 0),
+            urls: []
+        )
+
+        return [hero1, hero2]
     }
 }

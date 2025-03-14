@@ -4,14 +4,15 @@ import Foundation
 // MARK: - Hero
 struct Hero: Codable, Identifiable {
     let id: Int
-    let name, description: String
-    let modified: String
+    let name: String
+    let description: String?
+    let modified: Date
     let thumbnail: HeroThumbnail
     let resourceURI: String
     let comics, series: Comics
     let stories: Stories
     let events: Comics
-    let urls: [HeroURLElement]
+    let urls: [HeroURLElement]?
     
     enum CodingKeys: String, CodingKey {
         case id, name, description, modified, thumbnail, resourceURI, comics, series, stories, events, urls

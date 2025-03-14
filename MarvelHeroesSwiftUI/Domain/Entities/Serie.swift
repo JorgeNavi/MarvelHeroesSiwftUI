@@ -4,7 +4,7 @@ import Foundation
 struct Serie: Codable {
     let id: Int
     let title: String
-    let description: JSONNull?
+    let description: String?
     let resourceURI: String
     let urls: [URLElement]
     let startYear, endYear: Int
@@ -47,6 +47,23 @@ struct URLElement: Codable {
     let type: String
     let url: String
 }
+
+// MARK: - SeriesResponse
+struct SeriesResponse: Codable {
+    let code: Int
+    let status: String
+    let data: SeriesData
+}
+
+// MARK: - SeriesData
+struct SeriesData: Codable {
+    let offset: Int?
+    let limit: Int?
+    let total: Int?
+    let count: Int?
+    let results: [Serie]
+}
+
 
 // MARK: - Encode/decode helpers
 
