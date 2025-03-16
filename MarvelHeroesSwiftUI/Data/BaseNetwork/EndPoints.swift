@@ -4,6 +4,6 @@ import Foundation
 enum EndPoints: String {
     case heroes = "characters"
     static func series(for heroID: Int) -> String {
-        return "/v1/public/characters/\(heroID)/series"
+        return "characters/\(heroID)/series"
     }
 }

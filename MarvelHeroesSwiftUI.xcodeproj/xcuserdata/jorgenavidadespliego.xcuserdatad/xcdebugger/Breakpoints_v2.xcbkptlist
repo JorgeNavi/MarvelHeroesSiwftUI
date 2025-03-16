@@ -20,34 +20,6 @@
             landmarkType = "0">
             <Locations>
                <Location
-                  uuid = "A9F184C3-AF27-4877-A2F6-CED9BD5AE8E1 - 8b91992113902831"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MarvelHeroesSwiftUI.HeroesViewModel._filterUI.setter : Swift.String"
-                  moduleName = "MarvelHeroesSwiftUI.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///var/folders/4w/_5lgry011jq3fbx7_8fhmg_m0000gn/T/-6ca638.@__swiftmacro_19MarvelHeroesSwiftUI0B9ViewModelC06filterD018ObservationTrackedfMp_.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1"
-                  endingLineNumber = "1">
-               </Location>
-               <Location
-                  uuid = "A9F184C3-AF27-4877-A2F6-CED9BD5AE8E1 - a5193ad89fb2d8a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MarvelHeroesSwiftUI.HeroesViewModel._filterUI.modify : Swift.String"
-                  moduleName = "MarvelHeroesSwiftUI.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///var/folders/4w/_5lgry011jq3fbx7_8fhmg_m0000gn/T/-6ca638.@__swiftmacro_19MarvelHeroesSwiftUI0B9ViewModelC06filterD018ObservationTrackedfMp_.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1"
-                  endingLineNumber = "1">
-               </Location>
-               <Location
                   uuid = "A9F184C3-AF27-4877-A2F6-CED9BD5AE8E1 - 945db781e522694"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
@@ -60,6 +32,34 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "A9F184C3-AF27-4877-A2F6-CED9BD5AE8E1 - 3b9b3a7754646cf0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MarvelHeroesSwiftUI.HeroesViewModel._filterUI.setter : Swift.String"
+                  moduleName = "MarvelHeroesSwiftUI.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/4w/_5lgry011jq3fbx7_8fhmg_m0000gn/T/-8e3585.@__swiftmacro_19MarvelHeroesSwiftUI0B9ViewModelC06filterD018ObservationTrackedfMp_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1"
+                  endingLineNumber = "1">
+               </Location>
+               <Location
+                  uuid = "A9F184C3-AF27-4877-A2F6-CED9BD5AE8E1 - ba5b30fbce0f694b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MarvelHeroesSwiftUI.HeroesViewModel._filterUI.modify : Swift.String"
+                  moduleName = "MarvelHeroesSwiftUI.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/4w/_5lgry011jq3fbx7_8fhmg_m0000gn/T/-8e3585.@__swiftmacro_19MarvelHeroesSwiftUI0B9ViewModelC06filterD018ObservationTrackedfMp_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1"
+                  endingLineNumber = "1">
                </Location>
             </Locations>
          </BreakpointContent>
