@@ -1,8 +1,5 @@
 import Foundation
 
-protocol SeriesUseCaseProtocol {
-    func getSeries(heroID: Int) async -> [Serie]
-}
 
 final class SeriesUseCase: SeriesUseCaseProtocol {
     private let repository: SeriesRepositoryProtocol

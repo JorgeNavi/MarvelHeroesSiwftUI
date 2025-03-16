@@ -12,11 +12,9 @@ struct RootView: View {
     }
 }
 
-// MARK: - Vista Previa
-struct RootView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = HeroesViewModel()
-        return RootView().environment(viewModel)
-    }
+
+#Preview {
+    let viewModel = HeroesViewModel(useCaseHeroes: HeroesUseCaseMock())
+    return RootView().environment(viewModel)
 }
 

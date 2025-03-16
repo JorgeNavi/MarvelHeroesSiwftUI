@@ -43,14 +43,14 @@ class NetworkHeroes: HeroesNetworkProtocol {
                         modelReturn = decodedResponse.data.results
                         print("Héroes recibidos: \(modelReturn.count)")
                     } catch {
-                        print("❌ Error decodificando JSON: \(error.localizedDescription)")
+                        print("Error decodificando JSON: \(error.localizedDescription)")
                     }
                 } else {
-                    print("❌ Error en la petición: Código \(httpResponse.statusCode)")
+                    print("Error en la petición: Código \(httpResponse.statusCode)")
                 }
             }
         } catch {
-            print("❌ Error en la solicitud HTTP: \(error.localizedDescription)")
+            print("Error en la solicitud HTTP: \(error.localizedDescription)")
         }
         
         return modelReturn

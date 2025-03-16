@@ -1,7 +1,7 @@
+
 import Foundation
 
-protocol SeriesRepositoryProtocol {
+protocol SeriesUseCaseProtocol {
     
     func getSeries(heroID: Int) async -> [Serie]
 }
-
