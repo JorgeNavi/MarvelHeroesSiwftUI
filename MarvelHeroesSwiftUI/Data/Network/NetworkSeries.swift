@@ -35,7 +35,7 @@ class NetworkSeries: SeriesNetworkProtocol {
                 print("Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
                 
                 if httpResponse.statusCode == 200 {
-                    print("📥 Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
+                    //print("📥 Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
                     do {
                         let decodedResponse = try JSONDecoder.marvelDecoder.decode(SeriesResponse.self, from: data)
                         modelReturn = decodedResponse.data.results

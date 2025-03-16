@@ -1,5 +1,5 @@
 import Foundation
 
 protocol HeroesRepositoryProtocol {
-    func getHeroes(filter: String) async -> [Hero]
+    func getHeroes(filter: String) async -> [HeroResult]
 }

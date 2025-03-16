@@ -2,13 +2,13 @@ import Foundation
 
 @Observable
 final class HeroDetailViewModel {
-    let hero: Hero
+    let hero: HeroResult
     var series: [Serie] = []
     var state: StatusApp = .loading
     
     private let useCaseSeries: SeriesUseCaseProtocol
     
-    init(hero: Hero, useCaseSeries: SeriesUseCaseProtocol = SeriesUseCase()) {
+    init(hero: HeroResult, useCaseSeries: SeriesUseCaseProtocol = SeriesUseCase()) {
         self.hero = hero
         self.useCaseSeries = useCaseSeries
         

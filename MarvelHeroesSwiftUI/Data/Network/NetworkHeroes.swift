@@ -3,14 +3,14 @@ import Foundation
 import CryptoKit
 
 protocol HeroesNetworkProtocol {
-    func fetchHeroes(filter: String) async -> [Hero]
+    func fetchHeroes(filter: String) async -> [HeroResult]
 }
 
 class NetworkHeroes: HeroesNetworkProtocol {
     
-    func fetchHeroes(filter: String) async -> [Hero] {
+    func fetchHeroes(filter: String) async -> [HeroResult] {
         
-        var modelReturn = [Hero]()
+        var modelReturn = [HeroResult]()
         
         let ts = ConstantsApp.CONS_API_TS
         let hash = generateMD5("\(ts)\(ConstantsApp.CONS_API_PRIVATE_KEY)\(ConstantsApp.CONS_API_PUBLIC_KEY)")
@@ -37,9 +37,9 @@ class NetworkHeroes: HeroesNetworkProtocol {
                 //print("Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")") 
                 
                 if httpResponse.statusCode == 200 {
-                    print("📥 Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
+                    //print("📥 Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
                     do {
-                        let decodedResponse = try JSONDecoder.marvelDecoder.decode(HeroResponse.self, from: data)
+                        let decodedResponse = try JSONDecoder.marvelDecoder.decode(Hero.self, from: data)
                         modelReturn = decodedResponse.data.results
                         print("Héroes recibidos: \(modelReturn.count)")
                     } catch {
@@ -64,40 +64,40 @@ class NetworkHeroes: HeroesNetworkProtocol {
 }
 
 
-//Mock
+// Mock
 final class NetworkHeroesMock: HeroesNetworkProtocol {
-    func fetchHeroes(filter: String) async -> [Hero] {
-        let hero1 = Hero(
+    func fetchHeroes(filter: String) async -> [HeroResult] {
+        let hero1 = HeroResult(
             id: 1011334,
-            name: "3-D Man",
-            description: "Un héroe con visión mejorada y habilidades de combate mejoradas.",
+            name: "Spider-Man",
+            description: "El icónico héroe de Marvel con habilidades arácnidas.",
             modified: Date(),
             thumbnail: HeroThumbnail(
                 path: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784",
-                thumbnailExtension: "jpg"
+                thumbnailExtension: .jpg
             ),
             resourceURI: "http://gateway.marvel.com/v1/public/characters/1011334",
-            comics: Comics(available: 12, collectionURI: "", items: [], returned: 12),
-            series: Comics(available: 3, collectionURI: "", items: [], returned: 3),
-            stories: Stories(available: 21, collectionURI: "", items: [], returned: 20),
-            events: Comics(available: 1, collectionURI: "", items: [], returned: 1),
+            comics: HeroComics(available: 12, collectionURI: "", items: [], returned: 12),
+            series: HeroComics(available: 3, collectionURI: "", items: [], returned: 3),
+            stories: HeroStories(available: 21, collectionURI: "", items: [], returned: 20),
+            events: HeroComics(available: 1, collectionURI: "", items: [], returned: 1),
             urls: []
         )
 
-        let hero2 = Hero(
-            id: 1017100,
-            name: "A-Bomb",
-            description: "Rick Jones convertido en A-Bomb con fuerza sobrehumana.",
+        let hero2 = HeroResult(
+            id: 1009368,
+            name: "Iron Man",
+            description: "Tony Stark, un genio multimillonario que usa su armadura de Iron Man.",
             modified: Date(),
             thumbnail: HeroThumbnail(
-                path: "https://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16",
-                thumbnailExtension: "jpg"
+                path: "https://i.annihil.us/u/prod/marvel/i/mg/9/c0/527bb7b37ff55",
+                thumbnailExtension: .jpg
             ),
-            resourceURI: "http://gateway.marvel.com/v1/public/characters/1017100",
-            comics: Comics(available: 4, collectionURI: "", items: [], returned: 4),
-            series: Comics(available: 2, collectionURI: "", items: [], returned: 2),
-            stories: Stories(available: 7, collectionURI: "", items: [], returned: 7),
-            events: Comics(available: 0, collectionURI: "", items: [], returned: 0),
+            resourceURI: "http://gateway.marvel.com/v1/public/characters/1009368",
+            comics: HeroComics(available: 15, collectionURI: "", items: [], returned: 15),
+            series: HeroComics(available: 5, collectionURI: "", items: [], returned: 5),
+            stories: HeroStories(available: 30, collectionURI: "", items: [], returned: 30),
+            events: HeroComics(available: 2, collectionURI: "", items: [], returned: 2),
             urls: []
         )
 

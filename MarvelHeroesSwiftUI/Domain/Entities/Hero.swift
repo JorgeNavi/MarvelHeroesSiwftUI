@@ -1,100 +1,4 @@
 
-import Foundation
-
-// MARK: - Hero
-struct Hero: Codable, Identifiable {
-    let id: Int
-    let name: String
-    let description: String?
-    let modified: Date
-    let thumbnail: HeroThumbnail
-    let resourceURI: String
-    let comics, series: Comics
-    let stories: Stories
-    let events: Comics
-    let urls: [HeroURLElement]?
-    
-    enum CodingKeys: String, CodingKey {
-        case id, name, description, modified, thumbnail, resourceURI, comics, series, stories, events, urls
-    }
-}
-
-//Para facilitar el acceso a la imagen del heroe
-extension Hero {
-    var photo: String {
-        return "\(thumbnail.path).\(thumbnail.thumbnailExtension)"
-    }
-}
-
-// MARK: - HeroResponse
-struct HeroResponse: Codable {
-    let code: Int
-    let status: String
-    let data: HeroData
-}
-
-// MARK: - HeroData
-struct HeroData: Codable {
-    let offset: Int?
-    let limit: Int?
-    let total: Int?
-    let count: Int?
-    let results: [Hero]
-}
-
-// MARK: - Comics
-struct Comics: Codable {
-    let available: Int
-    let collectionURI: String
-    let items: [ComicsItem]
-    let returned: Int
-}
-
-// MARK: - ComicsItem
-struct ComicsItem: Codable {
-    let resourceURI: String
-    let name: String
-}
-
-// MARK: - Stories
-struct Stories: Codable {
-    let available: Int
-    let collectionURI: String
-    let items: [StoriesItem]
-    let returned: Int
-}
-
-// MARK: - StoriesItem
-struct StoriesItem: Codable {
-    let resourceURI: String
-    let name: String
-    let type: TypeEnum
-}
-
-enum TypeEnum: String, Codable {
-    case cover = "cover"
-    case interiorStory = "interiorStory"
-}
-
-// MARK: - Thumbnail
-struct HeroThumbnail: Codable {
-    let path: String
-    let thumbnailExtension: String
-
-    enum CodingKeys: String, CodingKey {
-        case path
-        case thumbnailExtension = "extension"
-    }
-}
-
-// MARK: - URLElement
-struct HeroURLElement: Codable {
-    let type: String
-    let url: String
-}
-
-/*
-
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
 //
@@ -107,58 +11,59 @@ struct Hero: Codable {
     let code: Int
     let status, copyright, attributionText, attributionHTML: String
     let etag: String
-    let data: DataClass
+    let data: HeroDataClass
 }
 
 // MARK: - DataClass
-struct DataClass: Codable {
+struct HeroDataClass: Codable {
     let offset, limit, total, count: Int
-    let results: [Result]
+    let results: [HeroResult]
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct HeroResult: Codable, Identifiable {
     let id: Int
     let name, description: String
     let modified: Date
-    let thumbnail: Thumbnail
+    let thumbnail: HeroThumbnail
     let resourceURI: String
-    let comics, series: Comics
-    let stories: Stories
-    let events: Comics
-    let urls: [URLElement]
+    let comics, series: HeroComics
+    let stories: HeroStories
+    let events: HeroComics
+    let urls: [HeroURLElement]
 }
+ 
 
 // MARK: - Comics
-struct Comics: Codable {
+struct HeroComics: Codable {
     let available: Int
     let collectionURI: String
-    let items: [ComicsItem]
+    let items: [HeroComicsItem]
     let returned: Int
 }
 
 // MARK: - ComicsItem
-struct ComicsItem: Codable {
+struct HeroComicsItem: Codable {
     let resourceURI: String
     let name: String
 }
 
 // MARK: - Stories
-struct Stories: Codable {
+struct HeroStories: Codable {
     let available: Int
     let collectionURI: String
-    let items: [StoriesItem]
+    let items: [HeroStoriesItem]
     let returned: Int
 }
 
 // MARK: - StoriesItem
-struct StoriesItem: Codable {
+struct HeroStoriesItem: Codable {
     let resourceURI: String
     let name: String
-    let type: ItemType
+    let type: HeroItemType
 }
 
-enum ItemType: String, Codable {
+enum HeroItemType: String, Codable {
     case cover = "cover"
     case empty = ""
     case interiorStory = "interiorStory"
@@ -166,7 +71,7 @@ enum ItemType: String, Codable {
 }
 
 // MARK: - Thumbnail
-struct Thumbnail: Codable {
+struct HeroThumbnail: Codable {
     let path: String
     let thumbnailExtension: Extension
 
@@ -182,14 +87,21 @@ enum Extension: String, Codable {
 }
 
 // MARK: - URLElement
-struct URLElement: Codable {
-    let type: URLType
+struct HeroURLElement: Codable {
+    let type: HeroURLType
     let url: String
 }
 
-enum URLType: String, Codable {
+enum HeroURLType: String, Codable {
     case comiclink = "comiclink"
     case detail = "detail"
     case wiki = "wiki"
 }
-*/
+
+//Para facilitar el acceso a la imagen del heroe
+extension HeroResult {
+    var photo: String {
+        return "\(thumbnail.path).\(thumbnail.thumbnailExtension)"
+    }
+}
+

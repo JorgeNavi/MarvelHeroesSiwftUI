@@ -4,7 +4,7 @@ import SwiftUI
 
 
 struct HeroCardView: View {
-    let hero: Hero
+    let hero: HeroResult
     
     var body: some View {
         VStack {
@@ -30,23 +30,25 @@ struct HeroCardView: View {
 }
 
 
+
 #Preview {
-    let mockHero = Hero(
+    let mockHero = HeroResult(
         id: 1011334,
         name: "Spider-Man",
         description: "El icónico héroe de Marvel con habilidades arácnidas.",
         modified: Date(),
         thumbnail: HeroThumbnail(
             path: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784",
-            thumbnailExtension: "jpg"
+            thumbnailExtension: .jpg
         ),
         resourceURI: "http://gateway.marvel.com/v1/public/characters/1011334",
-        comics: Comics(available: 12, collectionURI: "", items: [], returned: 12),
-        series: Comics(available: 3, collectionURI: "", items: [], returned: 3),
-        stories: Stories(available: 21, collectionURI: "", items: [], returned: 20),
-        events: Comics(available: 1, collectionURI: "", items: [], returned: 1),
+        comics: HeroComics(available: 12, collectionURI: "", items: [], returned: 12),
+        series: HeroComics(available: 3, collectionURI: "", items: [], returned: 3),
+        stories: HeroStories(available: 21, collectionURI: "", items: [], returned: 20),
+        events: HeroComics(available: 1, collectionURI: "", items: [], returned: 1),
         urls: []
     )
     
     HeroCardView(hero: mockHero)
 }
+ 

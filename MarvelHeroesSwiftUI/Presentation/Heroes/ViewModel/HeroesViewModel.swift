@@ -4,7 +4,7 @@ import Foundation
 @Observable
 final class HeroesViewModel {
     
-    var heroesData = [Hero]() // Lista de héroes observable
+    var heroesData = [HeroResult]() // Lista de héroes observable
     
     var state: StatusApp = .loading 
     

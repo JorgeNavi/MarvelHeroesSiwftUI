@@ -21,7 +21,7 @@ struct HeroDetailView: View {
                     .fontWeight(.bold)
                     .padding(.top, 8)
                 
-                Text((viewModel.hero.description!.isEmpty ? "No description available." : viewModel.hero.description)!)
+                Text((viewModel.hero.description.isEmpty ? "No description available." : viewModel.hero.description))
                     .font(.body)
                     .padding(.top, 4)
                 
@@ -55,22 +55,23 @@ struct HeroDetailView: View {
 
 
 #Preview {
-    let mockHero = Hero(
+    let mockHero = HeroResult(
         id: 1011334,
         name: "Hulk",
         description: "El gigante esmeralda más fuerte del universo Marvel.",
         modified: Date(),
         thumbnail: HeroThumbnail(
             path: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784",
-            thumbnailExtension: "jpg"
+            thumbnailExtension: .jpg
         ),
         resourceURI: "http://gateway.marvel.com/v1/public/characters/1011334",
-        comics: Comics(available: 12, collectionURI: "", items: [], returned: 12),
-        series: Comics(available: 3, collectionURI: "", items: [], returned: 3),
-        stories: Stories(available: 21, collectionURI: "", items: [], returned: 20),
-        events: Comics(available: 1, collectionURI: "", items: [], returned: 1),
+        comics: HeroComics(available: 12, collectionURI: "", items: [], returned: 12),
+        series: HeroComics(available: 3, collectionURI: "", items: [], returned: 3),
+        stories: HeroStories(available: 21, collectionURI: "", items: [], returned: 20),
+        events: HeroComics(available: 1, collectionURI: "", items: [], returned: 1),
         urls: []
     )
+    
     let viewModel = HeroDetailViewModel(hero: mockHero, useCaseSeries: SeriesUseCaseMock())
     return HeroDetailView(viewModel: viewModel)
 }

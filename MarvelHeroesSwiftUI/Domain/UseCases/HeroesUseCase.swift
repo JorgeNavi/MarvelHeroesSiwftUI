@@ -7,11 +7,10 @@ final class HeroesUseCase: HeroesUseCaseProtocol {
         self.repository = repository
     }
 
-    func getHeroes(filter: String) async -> [Hero] {
+    func getHeroes(filter: String) async -> [HeroResult] {
         return await repository.getHeroes(filter: filter)
     }
 }
-
 
 
 // Mock
@@ -22,7 +21,7 @@ final class HeroesUseCaseMock: HeroesUseCaseProtocol {
         self.repository = repository
     }
 
-    func getHeroes(filter: String) async -> [Hero] {
+    func getHeroes(filter: String) async -> [HeroResult] {
         return await repository.getHeroes(filter: filter)
     }
 }

@@ -55,3 +55,4 @@ struct HeroesView: View {
     let viewModel = HeroesViewModel(useCaseHeroes: HeroesUseCaseMock())
     return HeroesView().environment(viewModel)
 }
+

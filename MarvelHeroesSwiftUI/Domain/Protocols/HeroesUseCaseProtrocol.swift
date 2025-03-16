@@ -3,5 +3,5 @@ import Foundation
 
 protocol HeroesUseCaseProtocol {
 
-    func getHeroes(filter: String) async -> [Hero]
+    func getHeroes(filter: String) async -> [HeroResult]
 }
