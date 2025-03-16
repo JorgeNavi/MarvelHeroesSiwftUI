@@ -3,7 +3,7 @@ import Foundation
 @Observable
 final class HeroDetailViewModel {
     let hero: HeroResult
-    var series: [Serie] = []
+    var series: [SerieResult] = []
     var state: StatusApp = .loading
     
     private let useCaseSeries: SeriesUseCaseProtocol

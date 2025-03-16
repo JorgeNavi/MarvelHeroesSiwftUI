@@ -2,14 +2,14 @@ import Foundation
 import CryptoKit
 
 protocol SeriesNetworkProtocol {
-    func fetchSeries(heroID: Int) async -> [Serie]
+    func fetchSeries(heroID: Int) async -> [SerieResult]
 }
 
 class NetworkSeries: SeriesNetworkProtocol {
     
-    func fetchSeries(heroID: Int) async -> [Serie] {
+    func fetchSeries(heroID: Int) async -> [SerieResult] {
         
-        var modelReturn = [Serie]()
+        var modelReturn = [SerieResult]()
         
         let ts = ConstantsApp.CONS_API_TS
         let hash = generateMD5("\(ts)\(ConstantsApp.CONS_API_PRIVATE_KEY)\(ConstantsApp.CONS_API_PUBLIC_KEY)")
@@ -37,7 +37,7 @@ class NetworkSeries: SeriesNetworkProtocol {
                 if httpResponse.statusCode == 200 {
                     //print("📥 Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
                     do {
-                        let decodedResponse = try JSONDecoder.marvelDecoder.decode(SeriesResponse.self, from: data)
+                        let decodedResponse = try JSONDecoder.marvelDecoder.decode(Serie.self, from: data)
                         modelReturn = decodedResponse.data.results
                         print("series recibidos: \(modelReturn.count)")
                     } catch {
@@ -62,59 +62,66 @@ class NetworkSeries: SeriesNetworkProtocol {
 
 //Mock
 final class NetworkSeriesMock: SeriesNetworkProtocol {
-    func fetchSeries(heroID: Int) async -> [Serie] {
-        let serie1 = Serie(
-            id: 1,
-            title: "The Incredible Hulk (1962 - 1999)",
-            description: nil,
-            resourceURI: "http://gateway.marvel.com/v1/public/series/1",
-            urls: [
-                URLElement(type: "detail", url: "http://marvel.com/comics/series/1")
-            ],
-            startYear: 1962,
-            endYear: 1999,
-            rating: "PG",
-            type: "ongoing",
-            modified: Date(),
-            thumbnail: SerieThumbnail(
-                path: "https://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16",
-                thumbnailExtension: "jpg"
+    func fetchSeries(heroID: Int) async -> [SerieResult] {
+        let mockSeries: [SerieResult] = [
+            SerieResult(
+                id: 1001,
+                title: "The Amazing Spider-Man",
+                description: "A classic Spider-Man series with thrilling adventures.",
+                resourceURI: "http://gateway.marvel.com/v1/public/series/1001",
+                urls: [
+                    SerieURLElement(type: "wiki", url: "https://marvel.com/spiderman_series")
+                ],
+                startYear: 1963,
+                endYear: 2014,
+                rating: "PG-13",
+                type: "comic",
+                modified: Date(),
+                thumbnail: SerieThumbnail(
+                    path: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784",
+                    thumbnailExtension: "jpg"
+                ),
+                creators: SerieCreators(
+                    available: 2,
+                    collectionURI: "",
+                    items: [
+                        SerieCreatorsItem(resourceURI: "", name: "Stan Lee", role: "Writer"),
+                        SerieCreatorsItem(resourceURI: "", name: "Steve Ditko", role: "Artist")
+                    ],
+                    returned: 2
+                ),
+                characters: SerieCharacters(available: 3, collectionURI: "", items: [], returned: 3),
+                stories: SerieStories(available: 5, collectionURI: "", items: [], returned: 5),
+                comics: SerieCharacters(available: 20, collectionURI: "", items: [], returned: 20),
+                events: SerieCharacters(available: 1, collectionURI: "", items: [], returned: 1),
+                next: nil,
+                previous: nil
             ),
-            creators: Characters(available: 5, collectionURI: "", items: [], returned: 5),
-            characters: Characters(available: 10, collectionURI: "", items: [], returned: 10),
-            stories: Characters(available: 15, collectionURI: "", items: [], returned: 15),
-            comics: Characters(available: 20, collectionURI: "", items: [], returned: 20),
-            events: Characters(available: 2, collectionURI: "", items: [], returned: 2),
-            next: nil,
-            previous: nil
-        )
-
-        let serie2 = Serie(
-            id: 2,
-            title: "The Amazing Spider-Man (1999 - 2014)",
-            description: nil,
-            resourceURI: "http://gateway.marvel.com/v1/public/series/2",
-            urls: [
-                URLElement(type: "detail", url: "http://marvel.com/comics/series/2")
-            ],
-            startYear: 1999,
-            endYear: 2014,
-            rating: "T",
-            type: "limited",
-            modified: Date(),
-            thumbnail: SerieThumbnail(
-                path: "https://i.annihil.us/u/prod/marvel/i/mg/2/60/5232158de5b16",
-                thumbnailExtension: "jpg"
-            ),
-            creators: Characters(available: 6, collectionURI: "", items: [], returned: 6),
-            characters: Characters(available: 12, collectionURI: "", items: [], returned: 12),
-            stories: Characters(available: 18, collectionURI: "", items: [], returned: 18),
-            comics: Characters(available: 22, collectionURI: "", items: [], returned: 22),
-            events: Characters(available: 3, collectionURI: "", items: [], returned: 3),
-            next: nil,
-            previous: nil
-        )
-
-        return [serie1, serie2]
+            SerieResult(
+                id: 1002,
+                title: "X-Men: The Animated Series",
+                description: "Follow the X-Men as they battle against evil mutants and humans alike.",
+                resourceURI: "http://gateway.marvel.com/v1/public/series/1002",
+                urls: [],
+                startYear: 1992,
+                endYear: 1997,
+                rating: "TV-Y7",
+                type: "animated",
+                modified: Date(),
+                thumbnail: SerieThumbnail(
+                    path: "https://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16",
+                    thumbnailExtension: "jpg"
+                ),
+                creators: SerieCreators(available: 1, collectionURI: "", items: [], returned: 1),
+                characters: SerieCharacters(available: 5, collectionURI: "", items: [], returned: 5),
+                stories: SerieStories(available: 2, collectionURI: "", items: [], returned: 2),
+                comics: SerieCharacters(available: 10, collectionURI: "", items: [], returned: 10),
+                events: SerieCharacters(available: 0, collectionURI: "", items: [], returned: 0),
+                next: nil,
+                previous: nil
+            )
+        ]
+        
+        return mockSeries
     }
 }

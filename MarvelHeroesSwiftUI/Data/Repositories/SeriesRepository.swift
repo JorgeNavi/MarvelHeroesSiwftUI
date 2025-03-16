@@ -7,7 +7,7 @@ final class SeriesRepository: SeriesRepositoryProtocol {
         self.network = network
     }
     
-    func getSeries(heroID: Int) async -> [Serie] {
+    func getSeries(heroID: Int) async -> [SerieResult] {
         return await network.fetchSeries(heroID: heroID)
     }
 }
@@ -21,7 +21,7 @@ final class SeriesRepositoryMock: SeriesRepositoryProtocol {
         self.network = network
     }
 
-    func getSeries(heroID: Int) async -> [Serie] {
+    func getSeries(heroID: Int) async -> [SerieResult] {
         return await network.fetchSeries(heroID: heroID)
     }
 }

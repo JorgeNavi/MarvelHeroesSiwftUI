@@ -8,7 +8,7 @@ final class SeriesUseCase: SeriesUseCaseProtocol {
         self.repository = repository
     }
     
-    func getSeries(heroID: Int) async -> [Serie] {
+    func getSeries(heroID: Int) async -> [SerieResult] {
         return await repository.getSeries(heroID: heroID)
     }
 }
@@ -22,7 +22,7 @@ final class SeriesUseCaseMock: SeriesUseCaseProtocol {
         self.repository = repository
     }
 
-    func getSeries(heroID: Int) async -> [Serie] {
+    func getSeries(heroID: Int) async -> [SerieResult] {
         return await repository.getSeries(heroID: heroID)
     }
 }

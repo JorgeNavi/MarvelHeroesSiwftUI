@@ -1,34 +1,89 @@
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let serie = try? JSONDecoder().decode(Serie.self, from: jsonData)
+
 import Foundation
 
 // MARK: - Serie
 struct Serie: Codable {
+    let code: Int
+    let status, copyright, attributionText, attributionHTML: String
+    let etag: String
+    let data: SerieDataClass
+}
+
+// MARK: - DataClass
+struct SerieDataClass: Codable {
+    let offset, limit, total, count: Int
+    let results: [SerieResult]
+}
+
+// MARK: - Result
+struct SerieResult: Codable {
     let id: Int
     let title: String
     let description: String?
     let resourceURI: String
-    let urls: [URLElement]
+    let urls: [SerieURLElement]
     let startYear, endYear: Int
     let rating, type: String
     let modified: Date
     let thumbnail: SerieThumbnail
-    let creators, characters, stories, comics: Characters
-    let events: Characters
-    let next, previous: JSONNull?
+    let creators: SerieCreators
+    let characters: SerieCharacters
+    let stories: SerieStories
+    let comics, events: SerieCharacters
+    let next, previous: SerieNext?
 }
 
 // MARK: - Characters
-struct Characters: Codable {
+struct SerieCharacters: Codable {
     let available: Int
     let collectionURI: String
-    let items: [Item]
+    let items: [SerieNext]?
     let returned: Int
 }
 
-// MARK: - Item
-struct Item: Codable {
+// MARK: - Next
+struct SerieNext: Codable {
     let resourceURI: String
     let name: String
-    let role, type: String?
+}
+
+// MARK: - Creators
+struct SerieCreators: Codable {
+    let available: Int
+    let collectionURI: String
+    let items: [SerieCreatorsItem]?
+    let returned: Int
+}
+
+// MARK: - CreatorsItem
+struct SerieCreatorsItem: Codable {
+    let resourceURI: String
+    let name, role: String
+}
+
+// MARK: - Stories
+struct SerieStories: Codable {
+    let available: Int
+    let collectionURI: String
+    let items: [SerieStoriesItem]?
+    let returned: Int
+}
+
+// MARK: - StoriesItem
+struct SerieStoriesItem: Codable {
+    let resourceURI: String
+    let name: String
+    let type: SerieTypeEnum
+}
+
+enum SerieTypeEnum: String, Codable {
+    case cover = "cover"
+    case empty = ""
+    case interiorStory = "interiorStory"
 }
 
 // MARK: - Thumbnail
@@ -43,51 +98,14 @@ struct SerieThumbnail: Codable {
 }
 
 // MARK: - URLElement
-struct URLElement: Codable {
+struct SerieURLElement: Codable {
     let type: String
     let url: String
 }
 
-// MARK: - SeriesResponse
-struct SeriesResponse: Codable {
-    let code: Int
-    let status: String
-    let data: SeriesData
-}
-
-// MARK: - SeriesData
-struct SeriesData: Codable {
-    let offset: Int?
-    let limit: Int?
-    let total: Int?
-    let count: Int?
-    let results: [Serie]
-}
-
-
-// MARK: - Encode/decode helpers
-
-class JSONNull: Codable, Hashable {
-
-    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-            return true
-    }
-
-    public var hashValue: Int {
-            return 0
-    }
-
-    public init() {}
-
-    public required init(from decoder: Decoder) throws {
-            let container = try decoder.singleValueContainer()
-            if !container.decodeNil() {
-                    throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-            }
-    }
-
-    public func encode(to encoder: Encoder) throws {
-            var container = encoder.singleValueContainer()
-            try container.encodeNil()
+//Para facilitar el acceso a la imagen de la serie
+extension SerieResult {
+    var photo: String {
+        return "\(thumbnail.path).\(thumbnail.thumbnailExtension)"
     }
 }
