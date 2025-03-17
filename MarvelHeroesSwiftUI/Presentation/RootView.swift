@@ -1,13 +1,19 @@
 import SwiftUI
 
+
+//MARK: RootView
 struct RootView: View {
     @Environment(HeroesViewModel.self) var viewModel
 
     var body: some View {
-        if viewModel.state == .loading {
+        
+        switch viewModel.state {
+        case .loading:
             ProgressView("Loading heroes...")
-        } else {
+        case .loaded:
             HeroesView()
+        case .error(let error):
+            Text("Error: \(error)")
         }
     }
 }

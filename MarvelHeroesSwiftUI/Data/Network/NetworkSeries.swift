@@ -5,6 +5,8 @@ protocol SeriesNetworkProtocol {
     func fetchSeries(heroID: Int) async -> [SerieResult]
 }
 
+
+//MARK: NetworkClass to fetch Series
 class NetworkSeries: SeriesNetworkProtocol {
     
     func fetchSeries(heroID: Int) async -> [SerieResult] {
@@ -16,8 +18,6 @@ class NetworkSeries: SeriesNetworkProtocol {
         
         let urlCad = "\(ConstantsApp.CONS_API_URL)\(EndPoints.series(for: heroID))?ts=\(ts)&apikey=\(ConstantsApp.CONS_API_PUBLIC_KEY)&hash=\(hash)"
         
-        print("URL de series Generada: \(urlCad)")
-        
         guard let url = URL(string: urlCad) else {
             NSLog("Error building url")
             return modelReturn
@@ -27,32 +27,33 @@ class NetworkSeries: SeriesNetworkProtocol {
         request.httpMethod = HTTPMethods.get
         request.addValue(HTTPMethods.content, forHTTPHeaderField: HTTPMethods.contentTypeID)
         
-        //Hacemos la llamada al servidor:
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             if let httpResponse = response as? HTTPURLResponse {
-                print("Código de respuesta: \(httpResponse.statusCode)")
-                //print("Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
+                NSLog("Status Code: \(httpResponse.statusCode)")
                 
-                if httpResponse.statusCode == 200 {
-                    //print("📥 Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
+                if httpResponse.statusCode == HTTPResponseCodes.success {
+
                     do {
                         let decodedResponse = try JSONDecoder.marvelDecoder.decode(Serie.self, from: data)
                         modelReturn = decodedResponse.data.results
-                        print("series recibidos: \(modelReturn.count)")
+                        NSLog("series count: \(modelReturn.count)")
                     } catch {
-                        print("Error decodificando JSON: \(error.localizedDescription)")
+                        NSLog("Error decoding JSON: \(error.localizedDescription)")
                     }
+                }
+                else {
+                    NSLog("Request Error: Code \(httpResponse.statusCode)")
                 }
             }
         } catch {
-            print("Error en la solicitud HTTP: \(error.localizedDescription)")
+            NSLog("HTTP Error: \(error.localizedDescription)")
         }
         
         return modelReturn
     }
     
-    
+    //Func to generate MD5
     private func generateMD5(_ string: String) -> String {
         let digest = Insecure.MD5.hash(data: string.data(using: .utf8)!)
         return digest.map { String(format: "%02hhx", $0) }.joined()
@@ -60,7 +61,7 @@ class NetworkSeries: SeriesNetworkProtocol {
 }
 
 
-//Mock
+//MARK: Mock for testing and previews
 final class NetworkSeriesMock: SeriesNetworkProtocol {
     func fetchSeries(heroID: Int) async -> [SerieResult] {
         let mockSeries: [SerieResult] = [

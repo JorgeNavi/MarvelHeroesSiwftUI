@@ -25,40 +25,37 @@ struct HeroDetailViewModelTests {
 
             @Test("HeroDetailViewModel carga series correctamente")
             func heroDetailViewModelFetchTest() async throws {
-                // Arrange: Creamos un mock de `SeriesUseCase`
+ 
                 let mockUseCase = SeriesUseCaseMock()
                 let hero = Self.heroTest
-                
                 let viewModel = HeroDetailViewModel(hero: hero, useCaseSeries: mockUseCase)
 
-                // Act: Esperamos la carga de datos
                 await viewModel.getSeries()
 
-                // Assert: Verificamos que las series se cargaron correctamente y el estado es "loaded"
-                #expect(viewModel.series.count == 2) // Mock devuelve 2 series
+                #expect(viewModel.series.count == 2)
                 #expect(viewModel.state == .loaded)
             }
 
             @Test("HeroDetailViewModel cambia a estado de error si no hay series")
             func heroDetailViewModelEmptyStateTest() async throws {
-                // Arrange: Creamos un mock que devuelve una lista vacía
-                final class SeriesUseCaseEmptyMock: SeriesUseCaseProtocol {
-                    func getSeries(heroID: Int) async -> [SerieResult] {
-                        return []
-                    }
-                }
                 
                 let hero = Self.heroTest
-
-                let emptyUseCase = SeriesUseCaseEmptyMock()
+                let emptyUseCase = SeriesUseCaseEmptyMockDetail()
                 let viewModel = HeroDetailViewModel(hero: hero, useCaseSeries: emptyUseCase)
 
-                // Act: Esperamos la carga de datos
                 await viewModel.getSeries()
 
-                // Assert: Estado debe ser error y no debe haber series
                 #expect(viewModel.series.isEmpty)
-                #expect(viewModel.state == .error("No series found"))
+                #expect(viewModel.state == .error("No TVShows found"))
             }
         }
 }
+
+//creo un useCase que devuelva vacío para forzar el fallo
+final class SeriesUseCaseEmptyMockDetail: SeriesUseCaseProtocol {
+    func getSeries(heroID: Int) async -> [SerieResult] {
+        return []
+    }
+}
+
+

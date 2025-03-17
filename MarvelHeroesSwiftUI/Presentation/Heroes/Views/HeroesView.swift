@@ -3,8 +3,9 @@ import SwiftUI
 struct HeroesView: View {
     
     @Environment(HeroesViewModel.self) var viewModel
+    @State private var searchText: String = ""
     
-    // Configuración de la cuadrícula
+    //Columns configuration
     let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -13,29 +14,11 @@ struct HeroesView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TextField("Search hero...", text: Binding(
-                    get: { viewModel.filterUI },
-                    set: { newValue in
-                        viewModel.filterUI = newValue
-                        
-                        if !newValue.isEmpty, newValue.count > 2 {
-                            Task { await viewModel.getHeroes(newSearch: newValue) }
-                        } else {
-                            Task { await viewModel.getHeroes(newSearch: "") }
-                        }
-                    }
-                ))
-                .padding()
-
-                if viewModel.state == .loading {
+                switch viewModel.state {
+                case .loading:
                     ProgressView("Loading heroes...")
                         .padding()
-                        .id("loading ProgressView") // 🔹 Esto permite que ViewInspector lo encuentre
-                } else if case .error(let message) = viewModel.state {
-                    Text("⚠️ \(message)")
-                        .foregroundColor(.red)
-                        .padding()
-                } else {
+                case .loaded:
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(viewModel.heroesData) { hero in
@@ -45,11 +28,30 @@ struct HeroesView: View {
                             }
                         }
                         .padding()
-                        .id("loaded scrollview")
+                    }
+                case .error(let error):
+                    Text("\(error)")
+                        .foregroundColor(.red)
+                        .padding()
+
+                }
+            }
+            .navigationTitle("Marvel Heroes")
+            .searchable(text:$searchText, prompt: "Search Heroes...")
+            .onChange(of: searchText) { oldValue, newValue in
+                if !newValue.isEmpty, newValue.count > 2 {
+                    Task {
+                        await viewModel.getHeroes(newSearch: newValue)
+                    }
+                } else {
+                    Task {
+                        await viewModel.getHeroes(newSearch: "")
                     }
                 }
             }
-            .navigationTitle("Héroes")
+            .onAppear {
+                searchText = viewModel.filterUI
+            }
         }
     }
 }

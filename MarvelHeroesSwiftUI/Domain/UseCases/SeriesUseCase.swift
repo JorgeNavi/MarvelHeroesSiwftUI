@@ -1,6 +1,6 @@
 import Foundation
 
-
+//MARK: Series' UseCase
 final class SeriesUseCase: SeriesUseCaseProtocol {
     private let repository: SeriesRepositoryProtocol
     
@@ -14,7 +14,7 @@ final class SeriesUseCase: SeriesUseCaseProtocol {
 }
 
 
-// Mock
+//MARK: Mock for testing and previews
 final class SeriesUseCaseMock: SeriesUseCaseProtocol {
     private let repository: SeriesRepositoryProtocol
 

@@ -8,23 +8,27 @@ struct AppDataTests {
 
     @Suite("Data Testing") struct DataTest {
         
+        static let heroTest = HeroResult(
+            id: 1011334,
+            name: "Spiderman",
+            description: "That guy in blue and red",
+            modified: Date(),
+            thumbnail: HeroThumbnail(path: "https://example.com/spidermanphoto", thumbnailExtension: .jpg),
+            resourceURI: "http://examplehero.com",
+            comics: HeroComics(available: 0, collectionURI: "", items: [], returned: 0),
+            series: HeroComics(available: 0, collectionURI: "", items: [], returned: 0),
+            stories: HeroStories(available: 0, collectionURI: "", items: [], returned: 0),
+            events: HeroComics(available: 0, collectionURI: "", items: [], returned: 0),
+            urls: []
+        )
+        
         @Suite("HeroesNetwork", .serialized) struct HeroesNetworkTests {
             
             @Test("NetworkHeroes maneja error correctamente")
             func heroesNetworkErrorTest() async throws {
-                          // Arrange: Creamos un mock que devuelve error
-                final class NetworkHeroesErrorMock: HeroesNetworkProtocol {
-                    func fetchHeroes(filter: String) async -> [HeroResult] {
-                        return [] // Simula una respuesta vacía
-                    }
-                }
-
                 let heroesNetwork = NetworkHeroesErrorMock()
 
-                // Act: Llamamos al método fetchHeroes
                 let heroes = await heroesNetwork.fetchHeroes(filter: "")
-
-                // Assert: Debe devolver una lista vacía
                 #expect(heroes.isEmpty)
                 }
             }
@@ -33,21 +37,25 @@ struct AppDataTests {
 
             @Test("NetworkSeries maneja error correctamente")
             func seriesNetworkErrorTest() async throws {
-                // Arrange: Creamos un mock que devuelve error
-                final class NetworkSeriesErrorMock: SeriesNetworkProtocol {
-                    func fetchSeries(heroID: Int) async -> [SerieResult] {
-                        return [] // Simula una respuesta vacía
-                    }
-                }
 
                 let seriesNetwork = NetworkSeriesErrorMock()
-
-                // Act: Llamamos al método fetchSeries
                 let series = await seriesNetwork.fetchSeries(heroID: 1011334)
-
-                // Assert: Debe devolver una lista vacía
                 #expect(series.isEmpty)
             }
         }
+    }
+}
+
+//creo un NetworkHeroesMock que devuelva una lista vacia para forzar un error
+final class NetworkHeroesErrorMock: HeroesNetworkProtocol {
+    func fetchHeroes(filter: String) async -> [HeroResult] {
+        return []
+    }
+}
+
+//creo un NetworkSeriesMock que devuelva una lista vacia para forzar un error
+final class NetworkSeriesErrorMock: SeriesNetworkProtocol {
+    func fetchSeries(heroID: Int) async -> [SerieResult] {
+        return [] // Simula una respuesta vacía
     }
 }

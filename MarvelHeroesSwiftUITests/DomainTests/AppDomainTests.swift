@@ -73,14 +73,11 @@ struct AppDomainTests {
 
             @Test("HeroesUseCase return heroes")
             func heroesUseCaseTest() async throws {
-                // Arrange: Crear el mock del repositorio
+                
                 let repositoryMock = HeroesRepositoryMock()
                 let useCase = HeroesUseCaseMock(repository: repositoryMock)
-
-                // Act: Llamar al caso de uso
                 let heroes = await useCase.getHeroes(filter: "")
-
-                // Assert: Verificar que devuelve los datos esperados
+                
                 #expect(heroes.count == 2)
                 #expect(heroes.first?.name == "Spider-Man")
                 #expect(heroes.last?.name == "Iron Man")
@@ -88,14 +85,12 @@ struct AppDomainTests {
             
             @Test("SeriesUseCase return series")
             func seriesUseCaseTest() async throws {
-                // Arrange: Crear el mock del repositorio
+
                 let repositoryMock = SeriesRepositoryMock()
                 let useCase = SeriesUseCaseMock(repository: repositoryMock)
 
-                // Act: Llamar al caso de uso
                 let series = await useCase.getSeries(heroID: 1)
 
-                // Assert: Verificar que devuelve los datos esperados
                 #expect(series.count == 2)
                 #expect(series.first?.title == "The Amazing Spider-Man")
                 #expect(series.last?.title == "X-Men: The Animated Series")

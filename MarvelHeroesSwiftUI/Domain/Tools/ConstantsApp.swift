@@ -1,6 +1,6 @@
 import Foundation
 
-//Contant Values for the App:
+//MARK: App's Contant Values
 public struct ConstantsApp {
     
 

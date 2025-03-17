@@ -1,6 +1,6 @@
 import Foundation
 
-//Posible Codes for API responses
+//MARK: Posible Codes for API responses
 struct HTTPResponseCodes {
     static let success = 200
     static let Invalid = 401 //Invalid Referer or Hash

@@ -3,6 +3,8 @@
 
 import Foundation
 
+
+//MARK: App State
 enum StatusApp: Equatable {
-    case none, loading, loaded, error(String)
+    case loading, loaded, error(String)
 }

@@ -1,5 +1,7 @@
 import Foundation
 
+
+//MARK: Heroes' RepositoryClass
 class HeroesRepository: HeroesRepositoryProtocol {
     private let network: HeroesNetworkProtocol
 
@@ -14,7 +16,7 @@ class HeroesRepository: HeroesRepositoryProtocol {
 
 
 
-// Mock
+//MARK: Mock for testing and previews
 final class HeroesRepositoryMock: HeroesRepositoryProtocol {
     private let network: HeroesNetworkProtocol
 

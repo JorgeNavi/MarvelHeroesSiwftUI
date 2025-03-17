@@ -1,5 +1,7 @@
 import Foundation
 
+
+//MARK: HeroesDetail's ViewModel
 @Observable
 final class HeroDetailViewModel {
     let hero: HeroResult
@@ -21,7 +23,7 @@ final class HeroDetailViewModel {
     func getSeries() async {
         let data = await useCaseSeries.getSeries(heroID: hero.id)
         if data.isEmpty {
-            state = .error("No series found")
+            state = .error("No TVShows found")
         } else {
             series = data
             state = .loaded

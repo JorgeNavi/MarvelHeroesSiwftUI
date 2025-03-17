@@ -1,5 +1,6 @@
 import Foundation
 
+//MARK: Heroes' UseCase
 final class HeroesUseCase: HeroesUseCaseProtocol {
     let repository: HeroesRepositoryProtocol
 
@@ -13,7 +14,7 @@ final class HeroesUseCase: HeroesUseCaseProtocol {
 }
 
 
-// Mock
+//MARK: Mock for testing and previews
 final class HeroesUseCaseMock: HeroesUseCaseProtocol {
     private let repository: HeroesRepositoryProtocol
 

@@ -1,6 +1,6 @@
 import Foundation
 
-
+//MARK: App's HttpMethods 
 struct HTTPMethods {
     static let get = "GET"
     static let post = "POST"

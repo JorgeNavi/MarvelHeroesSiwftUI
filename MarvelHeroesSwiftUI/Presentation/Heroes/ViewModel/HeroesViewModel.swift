@@ -1,21 +1,19 @@
 import Foundation
 
-
+//MARK: Heroes' ViewModel
 @Observable
 final class HeroesViewModel {
     
-    var heroesData = [HeroResult]() // Lista de héroes observable
-    
-    var state: StatusApp = .loading 
-    
+    var heroesData = [HeroResult]()
+    var state: StatusApp = .loading
     var filterUI: String = ""
     
     @ObservationIgnored
-    private let useCaseHeroes: HeroesUseCaseProtocol // No observable, inyección de dependencias
+    private let useCaseHeroes: HeroesUseCaseProtocol
     
     init(useCaseHeroes: HeroesUseCaseProtocol = HeroesUseCase()) {
         self.useCaseHeroes = useCaseHeroes
-        print("🔵 Inicializando HeroesViewModel y llamando a getHeroes()")
+        NSLog("Init HeroesViewModel and calling getHeroes()")
         Task {
             await getHeroes()
         }
@@ -23,11 +21,9 @@ final class HeroesViewModel {
     
     @MainActor
     func getHeroes(newSearch: String = "") async {
-        print("🟢 getHeroes() ejecutado con filtro: \(newSearch)")
-        
         let data = await useCaseHeroes.getHeroes(filter: newSearch)
-        print("✅ Datos recibidos: \(data.count) héroes")
-        if data.isEmpty { //si no hay datos que mostrar, ponemos el state en error.
+        NSLog("Heroes recieved: \(data.count) heroes")
+        if data.isEmpty {
             state = .error("Heroes not found")
         } else {
             heroesData = data

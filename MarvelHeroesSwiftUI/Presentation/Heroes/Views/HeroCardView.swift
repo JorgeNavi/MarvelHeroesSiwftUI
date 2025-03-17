@@ -2,12 +2,13 @@
 
 import SwiftUI
 
-
+//MARK: View of the Hero Card
 struct HeroCardView: View {
     let hero: HeroResult
     
     var body: some View {
         VStack {
+            //Image first
             AsyncImage(url: URL(string: hero.photo)) { image in
                 image.resizable()
                      .scaledToFill()
@@ -17,6 +18,7 @@ struct HeroCardView: View {
             .frame(width: 150, height: 150)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             
+            //and hero name
             Text(hero.name)
                 .font(.headline)
                 .foregroundColor(.gray)

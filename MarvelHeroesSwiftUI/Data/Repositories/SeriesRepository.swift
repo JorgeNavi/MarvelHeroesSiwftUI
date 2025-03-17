@@ -1,5 +1,6 @@
 import Foundation
 
+//MARK: Series' RepositoryClass
 final class SeriesRepository: SeriesRepositoryProtocol {
     private let network: SeriesNetworkProtocol
     
@@ -13,7 +14,7 @@ final class SeriesRepository: SeriesRepositoryProtocol {
 }
 
 
-// Mock
+//MARK: Mock for testing and previews
 final class SeriesRepositoryMock: SeriesRepositoryProtocol {
     private let network: SeriesNetworkProtocol
 
