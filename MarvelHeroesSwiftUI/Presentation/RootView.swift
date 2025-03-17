@@ -15,6 +15,7 @@ struct RootView: View {
         case .error(let error):
             Text("Error: \(error)")
         }
+        
     }
 }
 
