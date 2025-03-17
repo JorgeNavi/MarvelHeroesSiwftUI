@@ -8,16 +8,7 @@ final class HeroesViewModel {
     
     var state: StatusApp = .loading 
     
-    var filterUI: String = "" {
-        didSet {
-            guard filterUI != oldValue, !filterUI.isEmpty, filterUI.count > 1 else { return } // Evita llamadas innecesarias
-            Task {
-                print("🟠 Ejecutando getHeroes() desde filterUI con filtro: \(filterUI)")
-                await self.getHeroes(newSearch: self.filterUI)
-            }
-        }
-    }
-    
+    var filterUI: String = ""
     
     @ObservationIgnored
     private let useCaseHeroes: HeroesUseCaseProtocol // No observable, inyección de dependencias

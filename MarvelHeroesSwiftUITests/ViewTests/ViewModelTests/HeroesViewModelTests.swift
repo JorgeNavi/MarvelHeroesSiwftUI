@@ -23,21 +23,6 @@ struct HeroesViewModelTests {
                 #expect(viewModel.state == .loaded)
             }
 
-            @Test("HeroesViewModel maneja búsqueda con filtro")
-            func heroesViewModelSearchTest() async throws {
-                // Arrange: Usamos el mock
-                let mockUseCase = HeroesUseCaseMock()
-                let viewModel = HeroesViewModel(useCaseHeroes: mockUseCase)
-
-                // Act: Simulamos la búsqueda con filtro
-                viewModel.filterUI = "Spider"
-
-                try await Task.sleep(nanoseconds: 500_000_000) // 0.5 segundos
-
-                // Assert: Verificamos que se llamó a getHeroes con el filtro
-                #expect(viewModel.heroesData.count == 2) // Mock devuelve dos héroes
-                #expect(viewModel.heroesData.first?.name.contains("Spider") == true)
-            }
 
             @Test("HeroesViewModel cambia a estado de error si no hay héroes")
             func heroesViewModelEmptyStateTest() async throws {
