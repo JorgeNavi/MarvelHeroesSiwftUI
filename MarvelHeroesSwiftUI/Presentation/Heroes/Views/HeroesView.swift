@@ -4,9 +4,6 @@ struct HeroesView: View {
     
     @Environment(HeroesViewModel.self) var viewModel
     
-    @State private var searchText: String = ""
-    
-    
     // Configuración de la cuadrícula
     let columns = [
         GridItem(.flexible(), spacing: 16),
@@ -16,16 +13,24 @@ struct HeroesView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TextField("Search hero...", text: $searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.horizontal)
-                    .onChange(of: searchText) { oldValue, newValue in
+                TextField("Search hero...", text: Binding(
+                    get: { viewModel.filterUI },
+                    set: { newValue in
                         viewModel.filterUI = newValue
+                        
+                        if !newValue.isEmpty, newValue.count > 2 {
+                            Task { await viewModel.getHeroes(newSearch: newValue) }
+                        } else {
+                            Task { await viewModel.getHeroes(newSearch: "") }
+                        }
                     }
-                
+                ))
+                .padding()
+
                 if viewModel.state == .loading {
                     ProgressView("Loading heroes...")
                         .padding()
+                        .id("loading ProgressView") // 🔹 Esto permite que ViewInspector lo encuentre
                 } else if case .error(let message) = viewModel.state {
                     Text("⚠️ \(message)")
                         .foregroundColor(.red)
@@ -40,6 +45,7 @@ struct HeroesView: View {
                             }
                         }
                         .padding()
+                        .id("loaded scrollview")
                     }
                 }
             }
@@ -48,11 +54,7 @@ struct HeroesView: View {
     }
 }
 
-
-
-
 #Preview {
     let viewModel = HeroesViewModel(useCaseHeroes: HeroesUseCaseMock())
     return HeroesView().environment(viewModel)
 }
-

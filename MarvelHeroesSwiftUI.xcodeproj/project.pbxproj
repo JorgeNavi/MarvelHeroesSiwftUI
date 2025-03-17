@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FC58506E2D883CFA00F59152 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = FC58506D2D883CFA00F59152 /* ViewInspector */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		FC5850572D88278200F59152 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC58506E2D883CFA00F59152 /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +109,7 @@
 			);
 			name = MarvelHeroesSwiftUITests;
 			packageProductDependencies = (
+				FC58506D2D883CFA00F59152 /* ViewInspector */,
 			);
 			productName = MarvelHeroesSwiftUITests;
 			productReference = FC5850532D88278200F59152 /* MarvelHeroesSwiftUITests.xctest */;
@@ -159,6 +165,9 @@
 			);
 			mainGroup = FC77A2442D833ED700F3C1FC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FC58506C2D883CFA00F59152 /* XCRemoteSwiftPackageReference "ViewInspector" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FC77A24E2D833ED700F3C1FC /* Products */;
 			projectDirPath = "";
@@ -461,6 +470,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FC58506C2D883CFA00F59152 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FC58506D2D883CFA00F59152 /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FC58506C2D883CFA00F59152 /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FC77A2452D833ED700F3C1FC /* Project object */;
 }

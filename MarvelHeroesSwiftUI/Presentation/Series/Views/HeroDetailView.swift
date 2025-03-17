@@ -10,7 +10,7 @@ struct HeroDetailView: View {
                     image.resizable()
                         .scaledToFit()
                 } placeholder: {
-                    ProgressView()
+                    ProgressView().id("imageLoading") // 🔹 Identificador para la carga de imagen
                 }
                 .frame(height: 300)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
@@ -20,10 +20,12 @@ struct HeroDetailView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(.top, 8)
-                
+                    .id("heroName") // 🔹 Para los tests
+
                 Text((viewModel.hero.description.isEmpty ? "No description available." : viewModel.hero.description))
                     .font(.body)
                     .padding(.top, 4)
+                    .id("heroDescription") // 🔹 Para los tests
                 
                 Divider()
                 
@@ -35,10 +37,12 @@ struct HeroDetailView: View {
                 if viewModel.state == .loading {
                     ProgressView("Cargando series...")
                         .padding()
+                        .id("loadingIndicator") // 🔹 Para los tests
                 } else if case .error(let message) = viewModel.state {
                     Text("⚠️ \(message)")
                         .foregroundColor(.red)
                         .padding()
+                        .id("errorMessage") // 🔹 Para los tests
                 } else {
                     LazyVStack {
                         ForEach(viewModel.series, id: \.id) { serie in

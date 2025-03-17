@@ -10,23 +10,28 @@ struct SerieCardView: View {
                     .scaledToFill()
             } placeholder: {
                 ProgressView()
+                    .id("serie_image_loading_\(serie.id)") // ID único basado en la serie
             }
             .frame(width: 300, height: 200)
             .clipShape(RoundedRectangle(cornerRadius: 12))
+            .id("serie_image_\(serie.id)") // ID único para la imagen
             
             Text(serie.title)
                 .font(.headline)
                 .foregroundColor(.black)
                 .padding(.top, 4)
+                .id("serie_title_\(serie.id)") // ID único para el título
             
             Text(serie.description ?? "No description available.")
                 .font(.subheadline)
                 .foregroundColor(.gray)
+                .id("serie_description_\(serie.id)") // ID único para la descripción
         }
         .padding()
         .background(Color(.systemGray6))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .shadow(radius: 4)
+        .id("serie_card_\(serie.id)") // ID único para cada SerieCardView
     }
 }
 
