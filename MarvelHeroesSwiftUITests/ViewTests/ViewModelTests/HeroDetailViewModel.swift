@@ -30,7 +30,7 @@ struct HeroDetailViewModelTests {
                 let hero = Self.heroTest
                 let viewModel = HeroDetailViewModel(hero: hero, useCaseSeries: mockUseCase)
 
-                await viewModel.getSeries()
+                await viewModel.getSeries(heroID: 1011334)
 
                 #expect(viewModel.series.count == 2)
                 #expect(viewModel.state == .loaded)
@@ -43,7 +43,7 @@ struct HeroDetailViewModelTests {
                 let emptyUseCase = SeriesUseCaseEmptyMockDetail()
                 let viewModel = HeroDetailViewModel(hero: hero, useCaseSeries: emptyUseCase)
 
-                await viewModel.getSeries()
+                await viewModel.getSeries(heroID: 1011334)
 
                 #expect(viewModel.series.isEmpty)
                 #expect(viewModel.state == .error("No TVShows found"))

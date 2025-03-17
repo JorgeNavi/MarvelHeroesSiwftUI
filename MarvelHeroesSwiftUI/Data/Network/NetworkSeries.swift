@@ -22,6 +22,7 @@ class NetworkSeries: SeriesNetworkProtocol {
             NSLog("Error building url")
             return modelReturn
         }
+        NSLog("url de series: \(urlCad)")
         
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethods.get

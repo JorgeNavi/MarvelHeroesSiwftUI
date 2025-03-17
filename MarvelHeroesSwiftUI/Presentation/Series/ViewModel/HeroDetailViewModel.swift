@@ -13,14 +13,10 @@ final class HeroDetailViewModel {
     init(hero: HeroResult, useCaseSeries: SeriesUseCaseProtocol = SeriesUseCase()) {
         self.hero = hero
         self.useCaseSeries = useCaseSeries
-        
-        Task {
-            await getSeries()
-        }
     }
     
     @MainActor
-    func getSeries() async {
+    func getSeries(heroID: Int) async {
         let data = await useCaseSeries.getSeries(heroID: hero.id)
         if data.isEmpty {
             state = .error("No TVShows found")

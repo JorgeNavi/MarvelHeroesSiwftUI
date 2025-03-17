@@ -33,6 +33,7 @@ struct HeroDetailView: View {
                     .fontWeight(.semibold)
                     .padding(.top, 8)
                 
+                // Switch para manejar los estados
                 switch viewModel.state {
                 case .loading:
                     ProgressView("Loading TVshows...")
@@ -50,8 +51,13 @@ struct HeroDetailView: View {
                         }
                     }
                     .padding()
-                    .navigationTitle(viewModel.hero.name)//Tile with Hero Name
                 }
+            }
+            .navigationTitle(viewModel.hero.name)
+        }
+        .onAppear {
+            Task {
+                await viewModel.getSeries(heroID: viewModel.hero.id)
             }
         }
     }

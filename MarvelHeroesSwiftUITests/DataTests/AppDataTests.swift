@@ -28,7 +28,7 @@ struct AppDataTests {
             func heroesNetworkErrorTest() async throws {
                 let heroesNetwork = NetworkHeroesErrorMock()
 
-                let heroes = await heroesNetwork.fetchHeroes(filter: "")
+                let heroes = await heroesNetwork.fetchHeroes()
                 #expect(heroes.isEmpty)
                 }
             }
@@ -48,7 +48,7 @@ struct AppDataTests {
 
 //creo un NetworkHeroesMock que devuelva una lista vacia para forzar un error
 final class NetworkHeroesErrorMock: HeroesNetworkProtocol {
-    func fetchHeroes(filter: String) async -> [HeroResult] {
+    func fetchHeroes() async -> [HeroResult] {
         return []
     }
 }

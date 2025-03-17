@@ -6,7 +6,6 @@ final class HeroesViewModel {
     
     var heroesData = [HeroResult]()
     var state: StatusApp = .loading
-    var filterUI: String = ""
     
     @ObservationIgnored
     private let useCaseHeroes: HeroesUseCaseProtocol
@@ -20,8 +19,8 @@ final class HeroesViewModel {
     }
     
     @MainActor
-    func getHeroes(newSearch: String = "") async {
-        let data = await useCaseHeroes.getHeroes(filter: newSearch)
+    func getHeroes() async {
+        let data = await useCaseHeroes.getHeroes()
         NSLog("Heroes recieved: \(data.count) heroes")
         if data.isEmpty {
             state = .error("Heroes not found")

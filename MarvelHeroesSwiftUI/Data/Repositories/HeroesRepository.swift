@@ -9,8 +9,8 @@ class HeroesRepository: HeroesRepositoryProtocol {
         self.network = network
     }
 
-    func getHeroes(filter: String) async -> [HeroResult] {
-        return await network.fetchHeroes(filter: filter)
+    func getHeroes() async -> [HeroResult] {
+        return await network.fetchHeroes()
     }
 }
 
@@ -24,7 +24,7 @@ final class HeroesRepositoryMock: HeroesRepositoryProtocol {
         self.network = network
     }
 
-    func getHeroes(filter: String) async -> [HeroResult] {
-        return await network.fetchHeroes(filter: filter)
+    func getHeroes() async -> [HeroResult] {
+        return await network.fetchHeroes()
     }
 }

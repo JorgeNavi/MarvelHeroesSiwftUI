@@ -59,7 +59,7 @@ struct HeroDetailViewTests {
                 let viewModel = HeroDetailViewModel(hero: hero, useCaseSeries: SeriesUseCaseEmptyMock())
                 let view = HeroDetailView(viewModel: viewModel)
                 
-                try await viewModel.getSeries()
+                try await viewModel.getSeries(heroID: 1011334)
 
                 let errorMessage = try? view.inspect().find(viewWithId: "errorMessage")
 

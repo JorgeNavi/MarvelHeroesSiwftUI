@@ -3,28 +3,27 @@ import Foundation
 import CryptoKit
 
 protocol HeroesNetworkProtocol {
-    func fetchHeroes(filter: String) async -> [HeroResult]
+    func fetchHeroes() async -> [HeroResult]
 }
 
 //MARK: NetworkClass to fetch Heroes
 class NetworkHeroes: HeroesNetworkProtocol {
     
-    func fetchHeroes(filter: String) async -> [HeroResult] {
+    func fetchHeroes() async -> [HeroResult] {
         
         var modelReturn = [HeroResult]()
         let ts = ConstantsApp.CONS_API_TS
         let hash = generateMD5("\(ts)\(ConstantsApp.CONS_API_PRIVATE_KEY)\(ConstantsApp.CONS_API_PUBLIC_KEY)")
         
-        //stablishing an url for searching
-        let filterParam = filter.isEmpty ? "" : "&nameStartsWith=\(filter)"
         
         //Url
-        let urlCad = "\(ConstantsApp.CONS_API_URL)\(EndPoints.heroes.rawValue)?ts=\(ts)&apikey=\(ConstantsApp.CONS_API_PUBLIC_KEY)&hash=\(hash)\(filterParam)"
+        let urlCad = "\(ConstantsApp.CONS_API_URL)\(EndPoints.heroes.rawValue)?ts=\(ts)&apikey=\(ConstantsApp.CONS_API_PUBLIC_KEY)&hash=\(hash)"
         
         guard let url = URL(string: urlCad) else {
             NSLog("Error building url")
             return modelReturn
         }
+        NSLog("url de heroes: \(urlCad)")
         
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethods.get
@@ -66,7 +65,7 @@ class NetworkHeroes: HeroesNetworkProtocol {
 
 //MARK: Mock for testing and previews
 final class NetworkHeroesMock: HeroesNetworkProtocol {
-    func fetchHeroes(filter: String) async -> [HeroResult] {
+    func fetchHeroes() async -> [HeroResult] {
         let hero1 = HeroResult(
             id: 1011334,
             name: "Spider-Man",

@@ -3,7 +3,6 @@ import SwiftUI
 struct HeroesView: View {
     
     @Environment(HeroesViewModel.self) var viewModel
-    @State private var searchText: String = ""
     
     //Columns configuration
     let columns = [
@@ -37,21 +36,6 @@ struct HeroesView: View {
                 }
             }
             .navigationTitle("Marvel Heroes")
-            .searchable(text:$searchText, prompt: "Search Heroes...")
-            .onChange(of: searchText) { oldValue, newValue in
-                if !newValue.isEmpty, newValue.count > 2 {
-                    Task {
-                        await viewModel.getHeroes(newSearch: newValue)
-                    }
-                } else {
-                    Task {
-                        await viewModel.getHeroes(newSearch: "")
-                    }
-                }
-            }
-            .onAppear {
-                searchText = viewModel.filterUI
-            }
         }
     }
 }

@@ -76,7 +76,7 @@ struct AppDomainTests {
                 
                 let repositoryMock = HeroesRepositoryMock()
                 let useCase = HeroesUseCaseMock(repository: repositoryMock)
-                let heroes = await useCase.getHeroes(filter: "")
+                let heroes = await useCase.getHeroes()
                 
                 #expect(heroes.count == 2)
                 #expect(heroes.first?.name == "Spider-Man")

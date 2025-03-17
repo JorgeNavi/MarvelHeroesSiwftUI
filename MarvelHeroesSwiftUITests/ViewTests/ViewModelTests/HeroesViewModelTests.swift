@@ -38,7 +38,7 @@ struct HeroesViewModelTests {
 
 //Creo un mock que devuelva vacío para forzar el fallo
 final class HeroesUseCaseEmptyMock: HeroesUseCaseProtocol {
-    func getHeroes(filter: String) async -> [HeroResult] {
+    func getHeroes() async -> [HeroResult] {
         return []
     }
 }
