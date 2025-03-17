@@ -10,7 +10,7 @@ final class HeroesViewModel {
     
     var filterUI: String = "" {
         didSet {
-            guard !filterUI.isEmpty, filterUI.count > 1 else { return } // Evita llamadas con filtro vacío
+            guard filterUI != oldValue, !filterUI.isEmpty, filterUI.count > 1 else { return } // Evita llamadas innecesarias
             Task {
                 print("🟠 Ejecutando getHeroes() desde filterUI con filtro: \(filterUI)")
                 await self.getHeroes(newSearch: self.filterUI)

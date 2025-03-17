@@ -27,7 +27,7 @@ struct SerieResult: Codable {
     let resourceURI: String
     let urls: [SerieURLElement]
     let startYear, endYear: Int
-    let rating, type: String
+    let rating, type: String?
     let modified: Date
     let thumbnail: SerieThumbnail
     let creators: SerieCreators

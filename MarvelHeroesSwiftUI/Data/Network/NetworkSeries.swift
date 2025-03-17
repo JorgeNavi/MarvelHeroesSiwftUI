@@ -32,7 +32,7 @@ class NetworkSeries: SeriesNetworkProtocol {
             let (data, response) = try await URLSession.shared.data(for: request)
             if let httpResponse = response as? HTTPURLResponse {
                 print("Código de respuesta: \(httpResponse.statusCode)")
-                print("Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
+                //print("Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
                 
                 if httpResponse.statusCode == 200 {
                     //print("📥 Datos crudos recibidos: \(String(data: data, encoding: .utf8) ?? "No data")")
@@ -41,12 +41,12 @@ class NetworkSeries: SeriesNetworkProtocol {
                         modelReturn = decodedResponse.data.results
                         print("series recibidos: \(modelReturn.count)")
                     } catch {
-                        print("❌ Error decodificando JSON: \(error.localizedDescription)")
+                        print("Error decodificando JSON: \(error.localizedDescription)")
                     }
                 }
             }
         } catch {
-            print("❌ Error en la solicitud HTTP: \(error.localizedDescription)")
+            print("Error en la solicitud HTTP: \(error.localizedDescription)")
         }
         
         return modelReturn

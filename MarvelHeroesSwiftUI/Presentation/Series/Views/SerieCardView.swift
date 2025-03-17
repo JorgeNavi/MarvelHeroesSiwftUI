@@ -55,5 +55,5 @@ struct SerieCardView: View {
         previous: nil
     )
 
-    return SerieCardView(serie: mockSerie)
+    SerieCardView(serie: mockSerie)
 }
