@@ -23,7 +23,7 @@ class NetworkHeroes: HeroesNetworkProtocol {
             NSLog("Error building url")
             return modelReturn
         }
-        NSLog("url de heroes: \(urlCad)")
+        NSLog("heroes url: \(urlCad)")
         
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethods.get
