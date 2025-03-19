@@ -28,23 +28,13 @@ struct AppDomainTests {
             static let serieTest = SerieResult(
                 id: 1001,
                 title: "The Amazing Spider-Man",
-                description: "a spiderman show",
+                description: "A Spider-Man show",
                 resourceURI: "http://spidermanserie.com",
-                urls: [SerieURLElement(type: "detail", url: "http://marvel.com/spiderman")],
-                startYear: 1963,
-                endYear: 2021,
-                rating: "PG-13",
-                type: "ongoing",
-                modified: Date(),
-                thumbnail: SerieThumbnail(path: "https://example.com/amazing-spiderman", thumbnailExtension: "jpg"),
-                creators: SerieCreators(available: 1, collectionURI: "", items: [SerieCreatorsItem(resourceURI: "http://marvel.com/creator", name: "Stan Lee", role: "Writer")], returned: 1),
-                characters: SerieCharacters(available: 1, collectionURI: "", items: [SerieNext(resourceURI: "http://marvel.com/character", name: "Spider-Man")], returned: 1),
-                stories: SerieStories(available: 1, collectionURI: "", items: [SerieStoriesItem(resourceURI: "http://marvel.com/story", name: "Origin Story", type: .interiorStory)], returned: 1),
-                comics: SerieCharacters(available: 1, collectionURI: "", items: nil, returned: 1),
-                events: SerieCharacters(available: 1, collectionURI: "", items: nil, returned: 1),
-                next: nil,
-                previous: nil
+                thumbnail: SerieThumbnail(
+                    path: "https://example.com/amazing-spiderman",
+                    thumbnailExtension: "jpg"
                 )
+            )
 
             @Test("HeroResult Model")
             func modelHeroTest() async throws {
@@ -60,12 +50,8 @@ struct AppDomainTests {
                 let serie = Self.serieTest
                 #expect(serie.id == 1001)
                 #expect(serie.title == "The Amazing Spider-Man")
-                #expect(serie.description == "a spiderman show")
+                #expect(serie.description == "A Spider-Man show")
                 #expect(serie.photo == "https://example.com/amazing-spiderman.jpg")
-                #expect(serie.startYear == 1963)
-                #expect(serie.endYear == 2021)
-                #expect(serie.rating == "PG-13")
-                #expect(serie.urls.first?.url == "http://marvel.com/spiderman")
             }
         }
         
@@ -92,8 +78,8 @@ struct AppDomainTests {
                 let series = await useCase.getSeries(heroID: 1)
 
                 #expect(series.count == 2)
-                #expect(series.first?.title == "The Amazing Spider-Man")
-                #expect(series.last?.title == "X-Men: The Animated Series")
+                #expect(series.first?.title == "Uncanny X-Men (1963 - 2011)")
+                #expect(series.last?.title == "X-Men: Alpha (1995)")
             }
         }
     }

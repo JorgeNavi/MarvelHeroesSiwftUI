@@ -10,28 +10,15 @@ struct SerieCardViewTests {
     @Suite("Presentation Tests") struct SerieCardViewSuite {
         
         //mock de serie normal
-        private let serie = SerieResult(
+        let serie = SerieResult(
             id: 1001,
             title: "The Amazing Spider-Man",
             description: nil,
-            resourceURI: "http://gateway.marvel.com/v1/public/series/1001",
-            urls: [],
-            startYear: 1963,
-            endYear: 2014,
-            rating: "PG-13",
-            type: "comic",
-            modified: Date(),
+            resourceURI: "http://spidermanserie.com",
             thumbnail: SerieThumbnail(
-                path: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784",
+                path: "https://example.com/amazing-spiderman",
                 thumbnailExtension: "jpg"
-            ),
-            creators: SerieCreators(available: 2, collectionURI: "", items: [], returned: 2),
-            characters: SerieCharacters(available: 3, collectionURI: "", items: [], returned: 3),
-            stories: SerieStories(available: 5, collectionURI: "", items: [], returned: 5),
-            comics: SerieCharacters(available: 20, collectionURI: "", items: [], returned: 20),
-            events: SerieCharacters(available: 1, collectionURI: "", items: [], returned: 1),
-            next: nil,
-            previous: nil
+            )
         )
         
         @Test("SerieCardView muestra los datos correctamente")

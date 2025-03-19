@@ -65,65 +65,27 @@ class NetworkSeries: SeriesNetworkProtocol {
 //MARK: Mock for testing and previews
 final class NetworkSeriesMock: SeriesNetworkProtocol {
     func fetchSeries(heroID: Int) async -> [SerieResult] {
-        let mockSeries: [SerieResult] = [
+        return [
             SerieResult(
-                id: 1001,
-                title: "The Amazing Spider-Man",
-                description: "A classic Spider-Man series with thrilling adventures.",
-                resourceURI: "http://gateway.marvel.com/v1/public/series/1001",
-                urls: [
-                    SerieURLElement(type: "wiki", url: "https://marvel.com/spiderman_series")
-                ],
-                startYear: 1963,
-                endYear: 2014,
-                rating: "PG-13",
-                type: "comic",
-                modified: Date(),
+                id: 2258,
+                title: "Uncanny X-Men (1963 - 2011)",
+                description: "The flagship X-Men comic for over 40 years, Uncanny X-Men delivers action, suspense, and a hint of science fiction month in and month out.",
+                resourceURI: "http://gateway.marvel.com/v1/public/series/2258",
                 thumbnail: SerieThumbnail(
-                    path: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784",
+                    path: "http://i.annihil.us/u/prod/marvel/i/mg/9/00/512527be6fba3",
                     thumbnailExtension: "jpg"
-                ),
-                creators: SerieCreators(
-                    available: 2,
-                    collectionURI: "",
-                    items: [
-                        SerieCreatorsItem(resourceURI: "", name: "Stan Lee", role: "Writer"),
-                        SerieCreatorsItem(resourceURI: "", name: "Steve Ditko", role: "Artist")
-                    ],
-                    returned: 2
-                ),
-                characters: SerieCharacters(available: 3, collectionURI: "", items: [], returned: 3),
-                stories: SerieStories(available: 5, collectionURI: "", items: [], returned: 5),
-                comics: SerieCharacters(available: 20, collectionURI: "", items: [], returned: 20),
-                events: SerieCharacters(available: 1, collectionURI: "", items: [], returned: 1),
-                next: nil,
-                previous: nil
+                )
             ),
             SerieResult(
-                id: 1002,
-                title: "X-Men: The Animated Series",
-                description: "Follow the X-Men as they battle against evil mutants and humans alike.",
-                resourceURI: "http://gateway.marvel.com/v1/public/series/1002",
-                urls: [],
-                startYear: 1992,
-                endYear: 1997,
-                rating: "TV-Y7",
-                type: "animated",
-                modified: Date(),
+                id: 2104,
+                title: "X-Men: Alpha (1995)",
+                description: nil,
+                resourceURI: "http://gateway.marvel.com/v1/public/series/2104",
                 thumbnail: SerieThumbnail(
-                    path: "https://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16",
+                    path: "http://i.annihil.us/u/prod/marvel/i/mg/3/20/51e705f412d45",
                     thumbnailExtension: "jpg"
-                ),
-                creators: SerieCreators(available: 1, collectionURI: "", items: [], returned: 1),
-                characters: SerieCharacters(available: 5, collectionURI: "", items: [], returned: 5),
-                stories: SerieStories(available: 2, collectionURI: "", items: [], returned: 2),
-                comics: SerieCharacters(available: 10, collectionURI: "", items: [], returned: 10),
-                events: SerieCharacters(available: 0, collectionURI: "", items: [], returned: 0),
-                next: nil,
-                previous: nil
+                )
             )
         ]
-        
-        return mockSeries
     }
 }

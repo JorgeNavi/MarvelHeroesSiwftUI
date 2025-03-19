@@ -25,16 +25,7 @@ struct SerieResult: Codable {
     let title: String
     let description: String?
     let resourceURI: String
-    let urls: [SerieURLElement]
-    let startYear, endYear: Int
-    let rating, type: String?
-    let modified: Date
     let thumbnail: SerieThumbnail
-    let creators: SerieCreators
-    let characters: SerieCharacters
-    let stories: SerieStories
-    let comics, events: SerieCharacters
-    let next, previous: SerieNext?
 }
 
 // MARK: - Characters

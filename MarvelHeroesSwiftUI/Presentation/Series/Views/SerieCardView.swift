@@ -48,23 +48,10 @@ struct SerieCardView: View {
         title: "The Incredible Hulk",
         description: "Una de las series más icónicas de Marvel.",
         resourceURI: "http://gateway.marvel.com/v1/public/series/1",
-        urls: [SerieURLElement(type: "detail", url: "http://marvel.com/comics/series/1")],
-        startYear: 1962,
-        endYear: 1999,
-        rating: "PG",
-        type: "ongoing",
-        modified: Date(),
         thumbnail: SerieThumbnail(
             path: "https://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16",
             thumbnailExtension: "jpg"
-        ),
-        creators: SerieCreators(available: 5, collectionURI: "", items: [], returned: 5),
-        characters: SerieCharacters(available: 10, collectionURI: "", items: [], returned: 10),
-        stories: SerieStories(available: 15, collectionURI: "", items: [], returned: 15),
-        comics: SerieCharacters(available: 20, collectionURI: "", items: [], returned: 20),
-        events: SerieCharacters(available: 2, collectionURI: "", items: [], returned: 2),
-        next: nil,
-        previous: nil
+        )
     )
 
     SerieCardView(serie: mockSerie)
